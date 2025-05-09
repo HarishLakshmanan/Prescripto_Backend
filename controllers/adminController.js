@@ -25,7 +25,7 @@ const addDoctor = async (req,res)=>{
 
         //validating storng password
         if(password.length < 8){
-            return res.json({success:false,message:"Please enter a valid email"})
+            return res.json({success:false,message:"Please enter a valid password"})
         }
 
         //hash doctor password
