@@ -87,9 +87,9 @@ const loginUser = async (req, res) => {
 
 const getProfile = async (req, res) => {
     try {
-        const { userId } = req.body;
+        // const { userId } = req.body;
 
-        const userData = await userModel.findById(userId).select('-password')
+        const userData = await userModel.findById(req.userId).select('-password')
 
         res.json({ success: true, userData })
 
@@ -104,7 +104,7 @@ const updateProfile = async (req, res) => {
     try {
 
 
-        const { userId } = req.body;
+        // const { userId } = req.body;
         const { name, address, gender, dob, phone } = req.body
         const imageFile = req.file
 
@@ -112,7 +112,7 @@ const updateProfile = async (req, res) => {
             return res.json({ success: false, message: 'Data Missing' })
         }
 
-        await userModel.findByIdAndUpdate(userId, { name, address: JSON.parse(address), gender, dob, phone })
+        await userModel.findByIdAndUpdate(req.userId, { name, address: JSON.parse(address), gender, dob, phone })
 
 
 
@@ -122,7 +122,7 @@ const updateProfile = async (req, res) => {
 
 
 
-            await userModel.findByIdAndUpdate(userId, { image: imageUrl })
+            await userModel.findByIdAndUpdate(req.userId, { image: imageUrl })
 
 
         }
